@@ -9,10 +9,10 @@ function App() {
 
   return (
       <div>
-       <Footer/>
+       <Navbar/>
        <Header/>
        <Form/>
-       <Navbar/>
+       <Footer/>
        
       </div>
       
