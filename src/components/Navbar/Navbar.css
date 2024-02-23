@@ -2,7 +2,7 @@
     background-color: #333;
     color: #fff;
     padding: 0 auto;
-    width: 1200px;
+    width: 400px;
 
   }
   
@@ -17,15 +17,17 @@
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: bold;
+    margin-left: 2rem;
   }
   
   .nav-list {
     list-style: none;
     display: flex;
+    
   }
   
   .nav-item {
-    margin-right: 20px;
+    margin-right: 2rem;
   }
   
   .nav-link {
