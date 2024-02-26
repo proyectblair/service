@@ -8,10 +8,7 @@ import {getAuth, onAuthStateChanged} from 'firebase/auth';
 
 //importación de componentes
 
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
-import Form from './components/Form/Form';
-import CustomNavbar from './components/Navbar/Navbar';
+
 import Login from './screens/Login';
 import Home from './screens/Home';
 
@@ -40,10 +37,7 @@ function App() {
         {User ? <Home correoUser = {User.email}/> : <Login/> };
     
 
-       <CustomNavbar/>
-       <Header/>
-       <Form/>
-       <Footer/>
+      
        
       </div>
       
