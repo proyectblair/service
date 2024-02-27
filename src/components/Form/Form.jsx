@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import './Form.css'
 const FormMain = () => {
     return (
         <Container>
@@ -31,3 +32,4 @@ const FormMain = () => {
 }
 
 export default FormMain;
+
