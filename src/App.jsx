@@ -5,7 +5,7 @@ import Login from './components/Login/Login';
 import Header from './components/Header/Header';
 import Form from './components/Form/Form';
 import Footer from './components/Footer/Footer';
-import AuthComponent from './Firebase/AuthComponent';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 
@@ -18,10 +18,10 @@ function App() {
     <Router>
       <div>
         <Navbar/>
-        <Header/>
+        
         <Form/>
         <Footer/>
-        <AuthComponent/>
+        
       <div>
         <Routes>
           <Route path="/login" element={<Login />} />
