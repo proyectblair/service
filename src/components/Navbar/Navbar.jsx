@@ -1,21 +1,19 @@
 
-//import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import './Navbar.css';
+import { Navbar, NavLink, NavbarBrand } from "reactstrap";
 
-
-const CustomNavbar = () =>  {
-    return (
-      <nav className="navbar">
-      <div className="container">
-        <a className="brand" href="#">BlairWitch</a>
-        <ul className="nav-list">
-          <li className="nav-item">
-            <a className="nav-link" href="#">Login</a>
-          </li>
-          </ul>
-      </div>
-    </nav>
-    );
-  };
+function Example(args) {
   
-  export default CustomNavbar;
+
+  
+
+  return (
+    <div>
+      <Navbar {...args}>
+        <NavbarBrand href="/">PROYECTO DE SERVICIOS</NavbarBrand>
+        <NavLink href="/login">Login</NavLink> 
+      </Navbar>
+    </div>
+  );
+}
+
+export default Example;
