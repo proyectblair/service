@@ -1,13 +1,15 @@
-/* eslint-disable no-unused-vars */
+import './Login.css';
+// eslint-disable-next-line no-unused-vars
 import {React, useState} from 'react'
-import imgLogin from '../assets/login.jpg'
-import imgProfile from '../assets/perfil.png'
-import {FirebaseApp} from '../Firebase/config'
+import imgProfile from '../../../assets/perfil.png'
+import {FirebaseApp} from '../../../Firebase/config'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
 const auth = getAuth (FirebaseApp)
 
+
 const Login = () => {
+  
   
 const [registrando, setRegistrando] = useState(false)
 const functAuthentication = async(e)=>{
@@ -52,10 +54,6 @@ const functAuthentication = async(e)=>{
         </div>
         </div>
       </div>
-      <div className='col-md-8'>
-        <img src={imgLogin} alt="" className='img-login' />
-      </div>
-      
      </div>
   )
 }
