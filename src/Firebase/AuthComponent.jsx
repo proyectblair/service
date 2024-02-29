@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FirebaseApp } from './config';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
 import Login from '../components/Login/Login';
-import Home from '../components/Home/Home';
+import App from '../App';
 
 
 const auth = getAuth (FirebaseApp);
@@ -24,7 +24,7 @@ function AuthComponent() {
 
   return (
       <div>
-        {User ? <Home correoUser={User.email} /> : <Login />}
+        {User ? <App correoUser={User.email} /> : <Login />}
       </div>
   )
 

@@ -3,7 +3,9 @@ import './Login.css';
 import {React, useState} from 'react'
 import imgProfile from '../../assets/perfil.png'
 import {FirebaseApp} from '../../Firebase/config'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
+import { useNavigate } from 'react-router-dom';
+
 
 const auth = getAuth (FirebaseApp)
 
@@ -12,20 +14,36 @@ const Login = () => {
   
   
 const [registrando, setRegistrando] = useState(false)
-const functAuthentication = async(e)=>{
+const [setState] = useState(null);
+const navigate = useNavigate();
+const functAuthentication = async (e) => {
+  
 
   e.preventDefault();
-  const correo = e.target.email.value;
-  const contraseña = e.target.password.value;
-  
-  if (registrando) {
-    await createUserWithEmailAndPassword(auth, correo, contraseña);
-  }
-     else{
-      await signInWithEmailAndPassword(auth, correo, contraseña);
-     }
-  }
+  const correo = e.target.correo.value;
+  const contraseña = e.target.contraseña.value;
 
+  try {
+    if (registrando) {
+      await createUserWithEmailAndPassword(auth, correo, contraseña);
+    } else {
+      await signInWithEmailAndPassword(auth, correo, contraseña);
+    }
+    navigate('/');
+  
+  } catch (error) {
+    console.error('Error de autenticación:', error.message);
+  }
+  
+    try {
+      await signOut(auth);
+      setState(null);
+      navigate('/');
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error.message);
+    }
+ 
+};
   return (
     <div className='container'>
       <div className="row">
@@ -43,10 +61,10 @@ const functAuthentication = async(e)=>{
                 )} 
               <input 
               type="email" 
-              placeholder='Ingresar email' className='form-control' id='email'/>
+              placeholder='Ingresar email' className='form-control' id='correo'/>
               <input 
               type="password" 
-              placeholder='Ingresar contraseña' className='form-control' id='password'/>
+              placeholder='Ingresar contraseña' className='form-control' id='contraseña'/>
               <button className='btn-form-login'> {registrando ? "Registrate" : "Inicia sesión" }</button>
             </form>
             <h4 className='text-btn'> {registrando ? "¿Ya tiene una cuenta?" : "¿No tienes cuenta?"}

@@ -1,11 +1,9 @@
 
 import { Navbar, NavLink, NavbarBrand } from "reactstrap";
 
+
 function Example(args) {
   
-
-  
-
   return (
     <div>
       <Navbar {...args}>
@@ -17,3 +15,5 @@ function Example(args) {
 }
 
 export default Example;
+
+
