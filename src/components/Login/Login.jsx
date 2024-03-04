@@ -3,7 +3,7 @@ import './Login.css';
 import {React, useState} from 'react'
 import imgProfile from '../../assets/perfil.png'
 import {FirebaseApp} from '../../Firebase/config'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,  updateProfile} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -14,18 +14,18 @@ const Login = () => {
   
   
 const [registrando, setRegistrando] = useState(false)
-const [setState] = useState(null);
 const navigate = useNavigate();
-const functAuthentication = async (e) => {
-  
 
+const functAuthentication = async (e) => {
   e.preventDefault();
   const correo = e.target.correo.value;
   const contraseña = e.target.contraseña.value;
+  const nombre = e.target.name.value;
 
   try {
     if (registrando) {
-      await createUserWithEmailAndPassword(auth, correo, contraseña);
+      const userCredential = await createUserWithEmailAndPassword(auth, correo, contraseña);
+      await updateProfile(userCredential.user, { displayName: nombre });
     } else {
       await signInWithEmailAndPassword(auth, correo, contraseña);
     }
@@ -34,14 +34,6 @@ const functAuthentication = async (e) => {
   } catch (error) {
     console.error('Error de autenticación:', error.message);
   }
-  
-    try {
-      await signOut(auth);
-      setState(null);
-      navigate('/');
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error.message);
-    }
  
 };
   return (
@@ -55,7 +47,7 @@ const functAuthentication = async (e) => {
             <form className='form-login' onSubmit={functAuthentication}>
             {registrando && (
                   <>
-                    <input type="text" placeholder="Nombre" className="form-control" id="name" />
+                    <input type="text" placeholder="Nombre" className="form-control" id="name"/>
                     <input type="text" placeholder="Apellido" className="form-control" id="lastname" />
                   </>
                 )} 
