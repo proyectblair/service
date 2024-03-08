@@ -23,14 +23,18 @@ const functAuthentication = async (e) => {
   const nombre = e.target.name.value;
 
   try {
+
+
     if (registrando) {
       const userCredential = await createUserWithEmailAndPassword(auth, correo, contraseña);
+    
       await updateProfile(userCredential.user, { displayName: nombre });
     } else {
       await signInWithEmailAndPassword(auth, correo, contraseña);
     }
+    
     navigate('/');
-  
+    
   } catch (error) {
     console.error('Error de autenticación:', error.message);
   }

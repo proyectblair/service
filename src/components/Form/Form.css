@@ -1,27 +1,27 @@
-/* Estilo del contenedor */
+/* Estilo del contenedor 
 .Container {
     max-width: 500px;
     margin: 0 auto;
   }
   
-  /* Estilo del formulario */
+  /* Estilo del formulario 
   .Form {
     background-color: #fafafa;
     padding: 20px;
     border-radius: 10px;
   }
   
-  /* Estilo de los grupos de formularios */
+  /* Estilo de los grupos de formularios 
   .FormGroup {
     margin-bottom: 15px;
   }
   
-  /* Estilo de las etiquetas */
+  /* Estilo de las etiquetas 
   .Label {
     font-weight: bold;
   }
   
-  /* Estilo de los campos de entrada */
+  /* Estilo de los campos de entrada 
   .Input {
     width: 100%;
     padding: 10px;
@@ -30,7 +30,7 @@
     box-sizing: border-box;
   }
   
-  /* Estilo del botón de envío */
+  /* Estilo del botón de envío 
   .Button {
     background-color: #007bff;
     color: #fff;
@@ -40,7 +40,7 @@
     cursor: pointer;
   }
   
-  /* Cambio de color del botón al pasar el cursor sobre él */
+  /* Cambio de color del botón al pasar el cursor sobre él 
   .Button:hover {
     background-color: #0056b3;
   }
