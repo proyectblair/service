@@ -1,6 +1,6 @@
-import { Navbar, NavLink, NavbarBrand } from "reactstrap";
+/*import { Navbar, NavLink, NavbarBrand } from "reactstrap";
 import { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut, updateProfile} from 'firebase/auth';
 import { FirebaseApp } from "../../Firebase/config";
 import { Navigate } from 'react-router-dom';
 
@@ -10,8 +10,20 @@ const Example = (args) => {
   
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
+
+      if (user) {
+        const displayName = user.displayName;
+        if (!displayName && user.uid) {
+          
+          try {
+            await updateProfile(user, { displayName }); 
+          } catch (error) {
+            console.error('Error al actualizar el nombre del usuario:', error.message);
+          }
+        }
+      }
     });
 
     return () => unsubscribe();
@@ -27,7 +39,7 @@ const Example = (args) => {
   };
   return (
     <div>
-      <Navbar {...args}>
+     /*<Navbar {...args}>
         <NavbarBrand href="/">PROYECTO DE SERVICIOS</NavbarBrand>
         {user ? (
           <>
@@ -43,6 +55,6 @@ const Example = (args) => {
 }
 
 export default Example;
-
+*/
 
 
