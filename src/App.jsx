@@ -4,10 +4,13 @@ import Header from './components/Header/Header';
 import Slider from './components/Slider/Slider';
 import Footer from './components/Footer/Footer';
 import FormService from './components/FormService/FormService'; 
+import ButtonAppBar from "./components/navbar/Navbar"
+
 
 function App() {
   return (
     <Router>
+    <ButtonAppBar/>
       <div>
         <Routes>
           <Route path="/" element={<Home />} />

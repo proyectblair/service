@@ -1,60 +1,32 @@
-/*import { Navbar, NavLink, NavbarBrand } from "reactstrap";
-import { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, signOut, updateProfile} from 'firebase/auth';
-import { FirebaseApp } from "../../Firebase/config";
-import { Navigate } from 'react-router-dom';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
-const Example = (args) => {
-  const [user, setUser] = useState(null);
-  const auth = getAuth(FirebaseApp);
-  
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
-
-      if (user) {
-        const displayName = user.displayName;
-        if (!displayName && user.uid) {
-          
-          try {
-            await updateProfile(user, { displayName }); 
-          } catch (error) {
-            console.error('Error al actualizar el nombre del usuario:', error.message);
-          }
-        }
-      }
-    });
-
-    return () => unsubscribe();
-  }, [auth]);
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      Navigate('/');
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error.message);
-    }
-  };
+export default function ButtonAppBar() {
   return (
-    <div>
-     /*<Navbar {...args}>
-        <NavbarBrand href="/">PROYECTO DE SERVICIOS</NavbarBrand>
-        {user ? (
-          <>
-            <span className="username">Bienvenido, {user ?.displayName} </span> 
-            <NavLink onClick={handleLogout} href="#">Cerrar sesión</NavLink>
-          </>
-        ) : (
-          <NavLink href="/login">Login</NavLink>
-        )}
-      </Navbar>
-    </div>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            News
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
-
-export default Example;
-*/
-
-
