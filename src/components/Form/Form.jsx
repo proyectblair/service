@@ -1,7 +1,8 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
-import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+//import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import './Form.css'
-const FormMain = () => {
+/*const FormMain = () => {
     return (
         <Container>
             <Form>
@@ -31,5 +32,5 @@ const FormMain = () => {
     );
 }
 
-export default FormMain;
+export default FormMain;*/
 
