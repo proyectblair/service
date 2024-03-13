@@ -1,4 +1,4 @@
-import './Login.css';
+/*import './Login.css';
 // eslint-disable-next-line no-unused-vars
 import {React, useState} from 'react'
 import imgProfile from '../../assets/perfil.png'
@@ -75,4 +75,4 @@ const functAuthentication = async (e) => {
   )
 }
 
-export default Login;
+export default Login;*/
