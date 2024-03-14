@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Slider from './components/Slider/Slider';
 import Footer from './components/Footer/Footer';
 import FormService from './components/FormService/FormService'; 
+import FormMain from './components/Form/Form';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function Home() {
     <div>
       <Slider />
       <Header />
+      <FormMain/>
       <Footer />
     </div>
   );
