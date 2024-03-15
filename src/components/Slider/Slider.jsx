@@ -3,7 +3,9 @@ import { Paper, Slide } from '@mui/material';
 import imageSlider from '../../assets/image-slider.png';
 import imageSlider2 from '../../assets/image-slider2.png';
 
+
 const Slider = () => {
+
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
   const [showImage, setShowImage] = React.useState(true);
 
