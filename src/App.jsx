@@ -4,7 +4,8 @@ import Header from './components/Header/Header';
 import Slider from './components/Slider/Slider';
 import Footer from './components/Footer/Footer';
 import FormService from './components/FormService/FormService'; 
-import FormMain from './components/Form/Form';
+import ButtonAppBar from "./components/navbar/Navbar";
+
 
 function App() {
   return (
@@ -23,9 +24,9 @@ function App() {
 function Home() {
   return (
     <div>
+      <ButtonAppBar/>
       <Slider />
       <Header />
-      <FormMain/>
       <Footer />
     </div>
   );
