@@ -1,11 +1,36 @@
 import React from 'react';
 import { Container, TextField, Button, Grid } from '@mui/material';
 import './Form.css'
+
 const FormMain = () => {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const formData = {
+            nombre: event.target.nombre.value,
+            apellido: event.target.apellido.value,
+            telefono: event.target.telefono.value,
+            email: event.target.email.value,
+            mensaje: event.target.mensaje.value,
+        };
+
+        try {
+            const result = await fetch('/contact_form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ...formData, secret: 'firebaseIsCool' }),
+            });
+
+            // Hacer algo con el resultado de la solicitud, si es necesario
+        } catch (error) {
+            console.error('Error al enviar el formulario:', error);
+        }
+    };
+
     return (
-    <form onSubmit={handleSubmit}>
         <Container maxWidth="sm">
-            <form>
+            <form onSubmit={handleSubmit}> {/* Aquí agregamos onSubmit para que el formulario se maneje correctamente */}
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <TextField
@@ -67,17 +92,14 @@ const FormMain = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Button variant="contained" color="primary" fullWidth>
+                        <Button variant="contained" color="primary" type="submit" fullWidth> {/* Aquí agregamos type="submit" para que el botón envíe el formulario */}
                             Enviar
                         </Button>
                     </Grid>
                 </Grid>
             </form>
         </Container>
-    </form>
     );
 }
 
 export default FormMain;
-
-

@@ -13,7 +13,7 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home handleSubmit={handleSubmit} />} /> {/* Pasa handleSubmit como una prop a Home */}
           <Route path="/form-service" element={<FormService />} />
         </Routes>
       </div>
@@ -21,14 +21,13 @@ function App() {
   );
 }
 
-function Home() {
-  
+function Home({ handleSubmit }) { // Recibe handleSubmit como una prop
   return (
     <div>
       <Slider />
       <Header />
       {/* Pasa la función handleSubmit como una prop al componente FormMain */}
-      <FormMain handleSubmit={handleSubmit} />
+      <FormMain handleSubmit={handleSubmit}/>
       <Footer />
     </div>
   );
