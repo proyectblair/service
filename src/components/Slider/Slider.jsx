@@ -33,9 +33,9 @@ const Slider = () => {
             src={images[currentImageIndex]} 
             alt={`Slide ${currentImageIndex + 1}`} 
             style={{ 
-              width: '100%', // Ancho del 100% independientemente del tamaño de la pantalla
-              height: isMobile ? '279px' : 'auto', // Establece la altura en función de isMobile
-              objectFit: 'cover', // Asegura que la imagen se ajuste al contenedor sin distorsionarse
+              width: '100%', 
+              height: isMobile ? '279px' : 'auto', 
+              objectFit: 'cover', 
               display: 'flex',
               alignItems: 'center',
               margin: '0 auto'
