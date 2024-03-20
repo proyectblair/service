@@ -1,5 +1,5 @@
 const {onRequest} = require("firebase-functions/v2/https");
-// const logger = require("firebase-functions/logger");
+//const logger = require("firebase-functions/logger");
 const nodemailer = require("nodemailer");
 
 const transport = nodemailer.createTransport({
@@ -30,7 +30,7 @@ const sendContactFrom = (formData) => {
       .catch((e) => console.log(e));
 };
 
-exports.contactForm = onRequest((req, res) => {
+exports.contactForm = onRequest((req, res) => { // Aquí se cambió el nombre de la función exportada
   if (req.body.secret !== "firebaseIsCool") return res.send("Missing secret");
   sendContactFrom(req.body);
   res.send("Sending email...");

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container, TextField, Button, Grid } from '@mui/material';
-import './Form.css'
+import './Form.css';
 
 const FormMain = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const {target} = event;
         const formData = {
             nombre: event.target.nombre.value,
             apellido: event.target.apellido.value,
@@ -30,7 +31,7 @@ const FormMain = () => {
 
     return (
         <Container maxWidth="sm">
-            <form onSubmit={handleSubmit}> {/* Aquí agregamos onSubmit para que el formulario se maneje correctamente */}
+            <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <TextField
@@ -92,7 +93,7 @@ const FormMain = () => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Button variant="contained" color="primary" type="submit" fullWidth> {/* Aquí agregamos type="submit" para que el botón envíe el formulario */}
+                        <Button variant="contained" color="primary" type="submit" fullWidth>
                             Enviar
                         </Button>
                     </Grid>
@@ -103,3 +104,4 @@ const FormMain = () => {
 }
 
 export default FormMain;
+
