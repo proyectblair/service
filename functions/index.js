@@ -1,19 +1,37 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
-
 const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+//const logger = require("firebase-functions/logger");
+const nodemailer = require("nodemailer");
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+const transport = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: "proyectoblairwitch@gmail.com",
+    pass: "jbmxzcszvsxquxyd",
+  },
+});
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const sendContactFrom = (formData) => {
+  return transport
+      .sendMail({
+        subject: "Nuevo mensaje del formulario",
+        html: `
+                <h3>Tienes un nuevo mensaje!</h3>
+                <p>Nombre: ${formData.nombre} </p>
+                <p>Apellido: ${formData.apellido} </p>
+                <p>Telefono: ${formData.telefono} </p>
+                <p>Email: ${formData.email} </p>
+                <p>Mensaje: ${formData.mensaje} </p>
+            `,
+      })
+      .then((r) => {
+        console.log("Accepted => ", r.accepted);
+        console.log("Rejected => ", r.rejected);
+      })
+      .catch((e) => console.log(e));
+};
+
+exports.contactForm = onRequest((req, res) => { // Aquí se cambió el nombre de la función exportada
+  if (req.body.secret !== "firebaseIsCool") return res.send("Missing secret");
+  sendContactFrom(req.body);
+  res.send("Sending email...");
+});
