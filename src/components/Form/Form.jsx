@@ -19,14 +19,18 @@ const FormMain = () => {
         };
 
         try {
-            const response = await fetch('https://us-central1-blair-with.cloudfunctions.net/contactForm', {
-                method: 'POST',
+            const response = await fetch(
+              "https://contactform-z4em4uyszq-uc.a.run.app",
+              {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                  "Content-Type": "application/json",
                 },
                 body: JSON.stringify(formData),
-            });
-
+              }
+            );
+            console.log(response)
+            console.log(formData)
             // Verificar si la solicitud fue exitosa (código 200)
             if (response.ok) {
                 setSnackbarOpen(true); // Mostrar mensaje de éxito
