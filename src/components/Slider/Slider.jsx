@@ -1,9 +1,12 @@
 import React from 'react';
-import { Paper, Slide } from '@mui/material';
+import { Paper, Slide, useMediaQuery } from '@mui/material';
 import imageSlider from '../../assets/image-slider.png';
 import imageSlider2 from '../../assets/image-slider2.png';
+import Box from '@mui/material/Box';
 
 const Slider = () => {
+  const isMobile = useMediaQuery('(max-width: 426px)');
+
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
   const [showImage, setShowImage] = React.useState(true);
 
@@ -22,17 +25,32 @@ const Slider = () => {
   }, [currentImageIndex, images.length]);
 
   return (
-    <div>
-      <Slide direction="left" in={showImage} onExited={() => {}}>
+    <Box maxWidth="xl" display="flex" alignItems="center" justifyContent= "center">
+      <Slide 
+        direction="left" in={showImage} onExited={() => {}}>
         <Paper>
-          <img src={images[currentImageIndex]} alt={`Slide ${currentImageIndex + 1}`} style={{ width: '100%' }} />
+          <img 
+            src={images[currentImageIndex]} 
+            alt={`Slide ${currentImageIndex + 1}`} 
+            style={{ 
+              width: '100%', 
+              height: isMobile ? '279px' : 'auto', 
+              objectFit: 'cover', 
+              display: 'flex',
+              alignItems: 'center',
+              margin: '0 auto'
+            }} 
+          />
         </Paper>
       </Slide>
-    </div>
+    </Box>
   );
 };
 
 export default Slider;
+
+
+
 
 
 

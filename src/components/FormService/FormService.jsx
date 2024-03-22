@@ -1,10 +1,8 @@
-
-
 const FormService = () => {
   
   return (
     <div>
-      <h1>FormService</h1>
+      <h1>Servicio</h1>
     </div>
   );
 };
