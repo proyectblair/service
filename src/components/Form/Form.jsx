@@ -1,33 +1,45 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
-import { Container, TextField, Button, Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { Container, TextField, Button, Grid, Snackbar } from '@mui/material';
 import './Form.css';
 
 const FormMain = () => {
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const {target} = event;
+        const { target } = event;
         const formData = {
-            nombre: event.target.nombre.value,
-            apellido: event.target.apellido.value,
-            telefono: event.target.telefono.value,
-            email: event.target.email.value,
-            mensaje: event.target.mensaje.value,
+            nombre: target.nombre.value,
+            apellido: target.apellido.value,
+            telefono: target.telefono.value,
+            email: target.email.value,
+            mensaje: target.mensaje.value,
+            secret: 'firebaseIsCool'
         };
 
         try {
-            const result = await fetch('/contact_form', {
+            const response = await fetch('https://us-central1-blair-with.cloudfunctions.net/contactForm', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ ...formData, secret: 'firebaseIsCool' }),
+                body: JSON.stringify(formData),
             });
 
-            // Hacer algo con el resultado de la solicitud, si es necesario
+            // Verificar si la solicitud fue exitosa (código 200)
+            if (response.ok) {
+                setSnackbarOpen(true); // Mostrar mensaje de éxito
+            } else {
+                console.error('Error en la solicitud:', response.statusText);
+            }
         } catch (error) {
             console.error('Error al enviar el formulario:', error);
         }
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false); // Cerrar el Snackbar
     };
 
     return (
@@ -43,6 +55,7 @@ const FormMain = () => {
                             placeholder="Ingrese su nombre"
                             fullWidth
                             margin="normal"
+                            autoComplete="on"
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -54,6 +67,7 @@ const FormMain = () => {
                             placeholder="Ingrese su apellido"
                             fullWidth
                             margin="normal"
+                            autoComplete="on"
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -66,6 +80,7 @@ const FormMain = () => {
                             placeholder="Ingrese su teléfono"
                             fullWidth
                             margin="normal"
+                            autoComplete="on"
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -78,6 +93,7 @@ const FormMain = () => {
                             placeholder="Ingrese su email"
                             fullWidth
                             margin="normal"
+                            autoComplete="on"
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -91,6 +107,7 @@ const FormMain = () => {
                             placeholder="Escriba su mensaje aquí"
                             fullWidth
                             margin="normal"
+                            autoComplete="on"
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -100,9 +117,17 @@ const FormMain = () => {
                     </Grid>
                 </Grid>
             </form>
+
+            {/* Snackbar para mostrar mensaje de éxito */}
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+                message="¡Formulario enviado con éxito!"
+            />
         </Container>
     );
 }
 
 export default FormMain;
-

@@ -1,37 +1,47 @@
-const {onRequest} = require("firebase-functions/v2/https");
-//const logger = require("firebase-functions/logger");
-const nodemailer = require("nodemailer");
+const functions = require('firebase-functions');
+const nodemailer = require('nodemailer');
+const cors = require('cors')({ origin: true });
 
 const transport = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: "proyectoblairwitch@gmail.com",
-    pass: "jbmxzcszvsxquxyd",
-  },
+    service: "Gmail",
+    auth: {
+        user: "proyectoblairwitch@gmail.com",
+        pass: "jbmxzcszvsxquxyd",
+    },
 });
 
-const sendContactFrom = (formData) => {
-  return transport
-      .sendMail({
+// Configurar CORS middleware
+const corsHandler = cors({ origin: true });
+
+const sendContactForm = (formData) => {
+    return transport.sendMail({
         subject: "Nuevo mensaje del formulario",
         html: `
-                <h3>Tienes un nuevo mensaje!</h3>
-                <p>Nombre: ${formData.nombre} </p>
-                <p>Apellido: ${formData.apellido} </p>
-                <p>Telefono: ${formData.telefono} </p>
-                <p>Email: ${formData.email} </p>
-                <p>Mensaje: ${formData.mensaje} </p>
-            `,
-      })
-      .then((r) => {
-        console.log("Accepted => ", r.accepted);
-        console.log("Rejected => ", r.rejected);
-      })
-      .catch((e) => console.log(e));
+            <h3>Tienes un nuevo mensaje!</h3>
+            <p>Nombre: ${formData.nombre} </p>
+            <p>Apellido: ${formData.apellido} </p>
+            <p>Telefono: ${formData.telefono} </p>
+            <p>Email: ${formData.email} </p>
+            <p>Mensaje: ${formData.mensaje} </p>
+        `,
+    });
 };
 
-exports.contactForm = onRequest((req, res) => { // Aquí se cambió el nombre de la función exportada
-  if (req.body.secret !== "firebaseIsCool") return res.send("Missing secret");
-  sendContactFrom(req.body);
-  res.send("Sending email...");
+exports.contactForm = functions.https.onRequest((req, res) => {
+    corsHandler(req, res, () => {
+        if (req.method !== 'POST') {
+            return res.status(405).send('Method Not Allowed');
+        }
+
+        if (req.body.secret !== "firebaseIsCool") {
+            return res.status(403).send("Forbidden");
+        }
+
+        sendContactForm(req.body)
+            .then(() => res.send("Sending email..."))
+            .catch((error) => {
+                console.error('Error al enviar el formulario:', error);
+                res.status(500).send("Error al enviar el formulario");
+            });
+    });
 });
